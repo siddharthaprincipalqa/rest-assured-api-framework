@@ -25,3 +25,10 @@ jobs:
         env:
           GOREST_TOKEN: ${{ secrets.GOREST_TOKEN }}
         run: mvn --batch-mode test
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+            name: api-test-reports
+            path: target/surefire-reports/
+            retention-days: 7
